@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/projects.html">Projects</a>
+  </nav>
+  <h1>Projects</h1>
+  <ul id="list"></ul>
+  <script>
+    // Render project list
+
+    function renderProjectList(data) {
+
+      var list = document.querySelector('#list')
+
+      console.log(list)
+
+      var html = data.map(project => {
+        return `<li>${project.name}</li>`
+      }).join('')
+
+      console.log(html)
+
+      list.innerHTML = html
+
+    }
+
+
+    // Fetch data
+    async function fetchData() {
+      var result = await fetch('/data.json')
+      // Does JSON.parse under the hood
+      var data = await result.json()
+
+      console.log(data)
+
+      renderProjectList(data)
+    }
+
+    fetchData()
+
+  </script>
+</body>
+</html>
